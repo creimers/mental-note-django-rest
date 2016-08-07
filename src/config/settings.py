@@ -27,7 +27,11 @@ SECRET_KEY = 'ov4p%2ls7+tmi&@qt@=3_n+px*oxqk#+%jeza93j!1p!-cr$n9'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+
+CORS_ORIGIN_WHITELIST = (
+    'localhost:3000'
+)
 
 SITE_ID = 1
 
@@ -49,6 +53,7 @@ INSTALLED_APPS = [
 
     'django_filters',
 
+    'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
     'rest_framework_jwt',
@@ -60,6 +65,7 @@ INSTALLED_APPS = [
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -179,7 +185,6 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
       'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
       'rest_framework.authentication.BasicAuthentication',
-      'rest_framework.authentication.TokenAuthentication',
       ),
     'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',),
 }
