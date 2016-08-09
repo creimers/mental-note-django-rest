@@ -13,3 +13,6 @@ class NoteViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         return Note.objects.filter(owner=self.request.user)
 
+    def create(self, request, *args, **kwargs):
+        request.data['owner'] = request.user.id
+        return super(NoteViewSet, self).create(request, *args, **kwargs)
